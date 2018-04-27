@@ -8,7 +8,7 @@ export class DatabaseProvider {
    
   public getDB() {
     return this.sqlite.create({
-      name: 'dataGSB.db',
+      name: 'dataAppGSB.db',
       location: 'default'
     });
   }
@@ -34,10 +34,10 @@ export class DatabaseProvider {
     db.sqlBatch([
       ['CREATE TABLE IF NOT EXISTS categories (id integer primary key AUTOINCREMENT NOT NULL, name TEXT)'],
       ['CREATE TABLE IF NOT EXISTS praticiens (id integer primary key AUTOINCREMENT NOT NULL, nom TEXT, prenom REAL, adresse TEXT, departement TEXT, tel TEXT, specialitePlus TEXT, active integer, category_id integer, FOREIGN KEY(category_id) REFERENCES categories(id))'],
-      ['CREATE TABLE IF NOT EXISTS rapports (idRap integer primary key AUTOINCREMENT NOT NULL, date DATE, motif TEXT, bilan TEXT, medicament TEXT, nbEchantillon integer, active integer, praID integer, FOREIGN KEY(praID) REFERENCES praticiens(id))'],
+      ['CREATE TABLE IF NOT EXISTS rapports (id integer primary key AUTOINCREMENT NOT NULL, date DATE, motif TEXT, bilan TEXT, medicament TEXT, nbEchantillon integer, active integer, praID integer, FOREIGN KEY(praID) REFERENCES praticiens(id))'],
       ['CREATE TABLE IF NOT EXISTS familleMed (idFamille Text primary key NOT NULL, libelle TEXT)'],
-      ['CREATE TABLE IF NOT EXISTS medicaments (idMed integer primary key AUTOINCREMENT NOT NULL, nomCommercial TEXT, composition TEXT, effets TEXT,contreIndication TEXT, active integer, familleID integer, FOREIGN KEY(familleID) REFERENCES familleMed(idFamille))'],
-      ['CREATE TABLE IF NOT EXISTS users (idUser Text, nom Text, prenom Text, login Text, password Text, adresse Text, CodePostale Text, dateEmbauche Text)']
+      ['CREATE TABLE IF NOT EXISTS medicaments (id integer primary key AUTOINCREMENT NOT NULL, nomCommercial TEXT, composition TEXT, effets TEXT,contreIndication TEXT, active integer, familleID integer, FOREIGN KEY(familleID) REFERENCES familleMed(idFamille))'],
+      ['CREATE TABLE IF NOT EXISTS users (id Text, nom Text, prenom Text, login Text, password Text, adresse Text, CodePostale Text, dateEmbauche Text)']
     ])
       .then(() => console.log('Tables créées'))
       .catch(e => console.error('Erreur lors de la crétation des tables', e));

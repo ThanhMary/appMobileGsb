@@ -1,4 +1,3 @@
-
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { PraticienProvider, Praticien } from '../../providers/praticien/praticien';
@@ -23,7 +22,7 @@ searchText: string;
  
     this.model = new Rapport();
      if (this.navParams.data.id) {
-      this.rapportProvider.getR(this.navParams.data.id)
+      this.rapportProvider.get(this.navParams.data.id)
         .then((result: any) => {
           this.model = result;
         })
@@ -45,7 +44,7 @@ searchText: string;
     }
  
   save() {
-    this.saverapport()
+    this.saveRapport()
       .then(() => {
         this.toast.create({ message: 'rapport saved.', duration: 3000, position: 'botton' }).present();
         this.navCtrl.popTo(GestionRapportPage);
@@ -55,11 +54,11 @@ searchText: string;
       });
   }
  
-  private saverapport() {
+  private saveRapport() {
     if (this.model.id) {
-      return this.rapportProvider.updateR(this.model);
+      return this.rapportProvider.update(this.model);
     } else {
-      return this.rapportProvider.insertR(this.model);
+      return this.rapportProvider.insert(this.model);
     }
   }
  

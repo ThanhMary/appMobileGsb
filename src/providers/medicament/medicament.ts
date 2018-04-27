@@ -6,7 +6,11 @@ import { DatabaseProvider} from '../database/database';
 @Injectable()
 export class MedicamentProvider {
 
-  constructor(private dbProvider: DatabaseProvider) {  }
+  constructor(private dbProvider: DatabaseProvider) { 
+  
+   }
+
+
 // créer des fonctions de CRUD pour la gestion des medicaments
 
 //function add data

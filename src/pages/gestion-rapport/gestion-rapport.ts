@@ -23,11 +23,12 @@ export class GestionRapportPage {
   }
  
 public getAllRapports() {
-    this.rapportProvider.getAllR(!this.onlyInactives, this.searchDate)
+    this.rapportProvider.getAll(!this.onlyInactives, this.searchDate)
       .then((result: any[]) => {
         this.rapports = result;
-      });
-  }
+      }).catch ((e)=>console.log('erreur'));
+   }
+
 addRapport(){
     this.navCtrl.push(EditRapportPage);
   }
@@ -37,7 +38,7 @@ editRapport(id: number) {
   }
  
 removeRapport(rapport: Rapport) {
-    this.rapportProvider.removeR(rapport.id)
+    this.rapportProvider.remove(rapport.id)
       .then(() => {
        var index = this.rapports.indexOf(rapport);
         this.rapports.splice(index, 1);

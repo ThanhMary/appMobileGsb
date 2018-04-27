@@ -1,40 +1,45 @@
 import { Injectable } from '@angular/core';
-import { SQLiteObject } from '@ionic-native/sqlite';
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { DatabaseProvider} from '../database/database';
-//import { PraticienProvider, Praticien} from '../praticien/praticien';
+import { PraticienProvider, Praticien} from '../praticien/praticien';
+import { Toast } from '@ionic-native/toast';
+import { NavController, ToastController, DateTime } from 'ionic-angular';
+import { GestionRapportPage } from '../../pages/gestion-rapport/gestion-rapport';
 
 @Injectable()
 export class RapportProvider {
 
-  constructor(private dbProvider: DatabaseProvider) {  }
-// créer des fonctions de CRUD
 
-public insertR(rapport: Rapport){
-  return this.dbProvider.getDB()
-  .then((db: SQLiteObject) =>{
-    let sql='insert into rapports (date, motif, bilan, medicament, nbEchantillon, active, praID) values (?, ?, ?, ?, ?, ?, ?)';
-    let data= [rapport.date, rapport.motif, rapport.bilan, rapport.medicament, rapport.nbEchantillon,rapport.active ? 1 : 0, rapport.praID];
-     return db.executeSql(sql, data)
-    .catch((e)=>console.error('erreur can not insert',e));
-    })
-  .catch((e) => console.error('erreur can not getDB',e));
-}
+// créer des fonctions de CRUD
+constructor(private dbProvider: DatabaseProvider) { }
+ 
+  public insert(rapport: Rapport) {
+    return this.dbProvider.getDB()
+      .then((db: SQLiteObject) => {
+        let sql = 'insert into rapports (date, motif, bilan, medicament, nbEchantillon, active, praID)  values (?, ?, ?, ?, ?, ?, ?)';
+        let data =  [rapport.date, rapport.motif, rapport.bilan, rapport.medicament, rapport.nbEchantillon, rapport.active ? 1 : 0, rapport.praID]; 
+        return db.executeSql(sql, data)
+          .catch((e) => console.error('can not insert data rapports',e));
+      })
+      .catch((e) => console.error(e));
+  }
+ 
 
 //update data
-public updateR(rapport: Rapport){
+public update(rapport: Rapport){
   return this.dbProvider.getDB()
   .then ((db: SQLiteObject)=>{
     let sql = 'update rapports set date=?, motif=?, bilan=?, medicament=?, nbEchantillon=?, active=?, praID=? where id=?';
     let data = [rapport.date, rapport.motif, rapport.bilan, rapport.medicament, rapport.nbEchantillon, rapport.active ? 1 : 0, rapport.praID];
     
     return db.executeSql(sql, data)
-    .catch ((e)=>console.error('error get update',e));
+    .catch ((e)=>console.error('error update',e));
   })
   .catch ((e)=>console.error('error getDB',e));
 }
 
 //delete data 
-public removeR(id: number){
+public remove(id: number){
   return this.dbProvider.getDB()
   .then((db: SQLiteObject)=>{ 
     let sql = 'delete from rapports where id = ?';
@@ -47,10 +52,10 @@ public removeR(id: number){
 }
 
 //  get data
-public getR(id: number){
+public get(id: number){
   return this.dbProvider.getDB()
   .then((db:SQLiteObject)=>{
-    let sql = 'select * from rapports where id=?';
+    let sql = 'select * from rapports where id = ?';
     let data = [id];
   return db.executeSql(sql, data)
   .then ((data: any)=>{
@@ -63,7 +68,7 @@ public getR(id: number){
         rapport.bilan = item.bilan;
         rapport.medicament = item.medicament;
         rapport.nbEchantillon = item.nbEchantillon;
-        rapport.active = rapport.active;
+        rapport.active = item.active;
         rapport.praID = item.praID;
 
         return rapport;
@@ -77,7 +82,7 @@ public getR(id: number){
 
 // function det all data rapport
 
-public getAllR(active: boolean, date: Date = null){
+public getAll(active: boolean, date: Date = null){
   return this.dbProvider.getDB()
     .then ((db: SQLiteObject)=>{
       let sql = 'select r.*, p.nom as praticien_nom from rapports r inner join praticiens p on r.praID = p.id where r.active=?';
@@ -87,7 +92,6 @@ public getAllR(active: boolean, date: Date = null){
         sql += 'and r.date like ?'
         data.push ('%' + date + '%');
       }
-
     return db.executeSql(sql, data)
     .then((data: any)=>{
       if (data.rows.length = 0){

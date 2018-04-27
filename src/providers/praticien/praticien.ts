@@ -14,7 +14,7 @@ export class PraticienProvider {
         let data = [praticien.nom, praticien.prenom, praticien.adresse, praticien.departement, praticien.tel, praticien.specialitePlus,  praticien.active ? 1 : 0, praticien.category_id];
  
         return db.executeSql(sql, data)
-          .catch((e) => console.error(e));
+          .catch((e) => console.error('can not insert data praticien',e));
       })
       .catch((e) => console.error(e));
   }
