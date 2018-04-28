@@ -3,6 +3,7 @@ import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { PraticienProvider, Praticien } from '../../providers/praticien/praticien';
 import { RapportProvider, Rapport } from '../../providers/rapport/rapport';
 import { GestionRapportPage } from '../gestion-rapport/gestion-rapport';
+import { MedicamentProvider } from '../../providers/medicament/medicament';
 
 @Component({
   selector: 'page-edit-rapport',
@@ -11,14 +12,15 @@ import { GestionRapportPage } from '../gestion-rapport/gestion-rapport';
 export class EditRapportPage {
 model: Rapport; 
 praticiens= [];
+medicaments= [];
 onlyInactives: string;
 searchText: string;
   
   constructor(
     public navCtrl: NavController, public navParams: NavParams,
     private toast: ToastController, private rapportProvider: RapportProvider,
-    private praticienProvider: PraticienProvider
-  ) {
+    private praticienProvider: PraticienProvider,
+    private medicamentProvider: MedicamentProvider) {
  
     this.model = new Rapport();
      if (this.navParams.data.id) {
@@ -37,9 +39,11 @@ searchText: string;
       .then((result: any[]) => {
         this.praticiens = result;
       })
-      .catch(() => {
-        this.toast.create({ message: 'Erreur de get des praticiens.', duration: 3000, position: 'botton' }).present();
-      });
+           
+      this.medicamentProvider.getAll(!this.onlyInactives, this.searchText)
+      .then((result: any[]) => {
+        this.medicaments = result;
+      })
 
     }
  
@@ -47,7 +51,7 @@ searchText: string;
     this.saveRapport()
       .then(() => {
         this.toast.create({ message: 'rapport saved.', duration: 3000, position: 'botton' }).present();
-        this.navCtrl.popTo(GestionRapportPage);
+        this.navCtrl.pop();
       })
       .catch(() => {
         this.toast.create({ message: 'Erreur.', duration: 3000, position: 'botton' }).present();

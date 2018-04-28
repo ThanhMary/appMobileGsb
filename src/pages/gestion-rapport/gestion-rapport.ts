@@ -17,16 +17,17 @@ export class GestionRapportPage {
   constructor(public navCtrl: NavController, 
     private toast: ToastController, 
     private rapportProvider: RapportProvider) { }
- 
+
+
   ionViewDidEnter() {
     this.getAllRapports();
   }
- 
+  
 public getAllRapports() {
     this.rapportProvider.getAll(!this.onlyInactives, this.searchDate)
       .then((result: any[]) => {
         this.rapports = result;
-      }).catch ((e)=>console.log('erreur'));
+      });
    }
 
 addRapport(){

@@ -8,20 +8,24 @@
  
 <ion-content padding>
   <img src="assets/img/ecrit.png" style="display:block;width:90%;height:auto;margin-left:auto;margin-right:auto;" />
+  
   <ion-searchbar (ionInput)="filterRapports($event)" [(ngModel)]="searchDate"></ion-searchbar>
     <ion-list>
     <ion-item-sliding *ngFor="let rapport of rapports">
+     
       <button ion-item (click)="editRapport(rapport.id)">
-        {{rapport.bilan}}
-        <!-- <h1>{{ rapport.date | date: 'dd/MM/yyyy'}}</h1>
-        <p> {{ rapport.praticien_nom}} </p> -->
+        <h1>{{ rapport.date | date: 'dd/MM/yyyy'}}</h1>
+        <p> {{ rapport.praticien_nom }} </p> 
+        <p class="bilan"> {{ rapport.bilan }} </p>
       </button>
+
       <ion-item-options side="left">
         <button ion-button color="danger" (click)="removeRapport(rapport)">
           <ion-icon name="trash"></ion-icon>
           Supprimer
         </button>
      </ion-item-options>
+     
   </ion-item-sliding>
 </ion-list>
  
@@ -35,7 +39,7 @@
     <p>Total: {{ rapports.length }}</p>
     <ion-list>
       <ion-item no-lines>
-        <ion-label>Liste des inativés </ion-label>
+        <ion-label>Tourner:liste inactivé </ion-label>
         <ion-toggle name="listesInatives" [(ngModel)]="onlyInactives" (ionChange)="getAllRapports()"></ion-toggle>
       </ion-item>
     </ion-list>

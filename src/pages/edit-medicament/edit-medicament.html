@@ -14,7 +14,7 @@
        </ion-item>
       <ion-item >
           <ion-label stacked> Nom commercial </ion-label>
-          <ion-input type="text" [(ngModel)]="model.nomCommercial" name="nom"></ion-input>
+          <ion-input type="text" [(ngModel)]="model.nom" name ="nom"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label stacked>Famille de médicament</ion-label>
@@ -30,16 +30,28 @@
   
       <ion-item >
         <ion-label stacked> Effets </ion-label>
-        <ion-textarea [(ngModel)]="model.effets" name="effets" ></ion-textarea>
+        <ion-input [(ngModel)]="model.effets" name="effets" ></ion-input>
       </ion-item>
   
       <ion-item >
-        <ion-label stacked> ContreIndication </ion-label>
-        <ion-input type="text" [(ngModel)]="model.contreIndication" name="contreIndication"></ion-input>
+        <ion-label stacked> Posologie </ion-label>
+        <ion-select [(ngModel)]="model.posologie" name="posologie">
+            <ion-option value="adulte">Adulte</ion-option>
+            <ion-option value=" jeune adulte"> Jeune adulte</ion-option>
+            <ion-option value=" enfant"> Enfant</ion-option>
+            <ion-option value=" jeune enfant"> Jeune enfant</ion-option>
+            <ion-option value=" nourrisson"> Nourrisson</ion-option>
+        </ion-select>
       </ion-item>
 
-      <button ion-button type="submit" block color="positive" on-click= "save()">Enregistrer</button>
-     
-     </ion-list>
-     
-  </ion-content>
+      <ion-item>
+      <ion-label stacked>Ative</ion-label>
+      <ion-checkbox name="active" [(ngModel)]="model.active"></ion-checkbox>
+    </ion-item>
+	
+    <br>
+    <button ion-button block (click)="save()">Enregistrer</button>
+
+  </ion-list>
+ 
+</ion-content>

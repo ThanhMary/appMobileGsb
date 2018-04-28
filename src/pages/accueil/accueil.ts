@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { GestionRapportPage } from '../gestion-rapport/gestion-rapport';
 import { GestionPraticienPage } from '../gestion-praticien/gestion-praticien';
 import {GestionMedicamentPage} from '../gestion-medicament/gestion-medicament';

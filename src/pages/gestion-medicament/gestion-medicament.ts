@@ -4,7 +4,6 @@ import { NavController, NavParams, ToastController} from 'ionic-angular';
 import { AccueilPage} from '../accueil/accueil';
 import { EditMedicamentPage } from '../edit-medicament/edit-medicament';
 import { MedicamentProvider, Medicament} from '../../providers/medicament/medicament';
-import { FamilleProvider } from '../../providers/famille/famille';
 
 
 
@@ -20,8 +19,7 @@ export class GestionMedicamentPage {
   
   constructor(public navCtrl: NavController, 
               private toast: ToastController,
-              private medicamentProvider: MedicamentProvider,
-              private familleProvider: FamilleProvider) {  }
+              private medicamentProvider: MedicamentProvider) {  }
 
   
   ionViewDidLoad() {
@@ -50,7 +48,7 @@ export class GestionMedicamentPage {
       this.toast.create({ message: 'Medicament removed.', duration: 3000, position: 'botton' }).present();
     })
   }
-  filterMedicament(ev: any){
+  filterMedicaments(ev: any){
     this.getAllMedicaments();
   }
 

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
-
 import { AccueilPage } from '../accueil/accueil';
 import {MedicamentProvider, Medicament} from '../../providers/medicament/medicament';
 import { GestionMedicamentPage } from '../gestion-medicament/gestion-medicament';
@@ -30,7 +29,8 @@ export class EditMedicamentPage {
         })
       }
     }
-    
+  
+
   ionViewDidLoad() {
       this.familleProvider.getAll()
       .then((result: any[]) => {

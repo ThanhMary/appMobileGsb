@@ -29,34 +29,20 @@
       </ion-item>
 
       <ion-item>
-        <ion-label stacked> Medicaments </ion-label>
-        <ion-textarea type="text" [(ngModel)]="model.medicament" name="medicament" ></ion-textarea>
+        <ion-label stacked >Medicament</ion-label>
+          <ion-select name="medID" [(ngModel)]= "model.medID" multiple="true">
+            <ion-option *ngFor="let medicament of medicaments" value="{{medicament.id}}">{{medicament.nom}}</ion-option>
+          </ion-select>
       </ion-item>
       <ion-item>
         <ion-label stacked> Nombre d'échantillon </ion-label>
-        <ion-input type="number" [(ngModel)]="model.nbEchantillon" name="nbEchantillon" ></ion-input>
+        <ion-input type="text " [(ngModel)]="model.nbEchantillon" name="nbEchantillon" ></ion-input>
       </ion-item>
-<!--         
-           <ion-grid>
-              <ion-row>
-                <ion-col>
-                  <div>
-                    <ion-label stacked> Medicaments</ion-label>
-                    <ion-input type="text" [(ngModel)]="model.medicament" name="medicament" ></ion-input>
-                  </div>
-                </ion-col>
-               
-                <ion-col>
-                  <div><ion-label stacked> Nombres d'échantillon </ion-label>
-                    <ion-input type="number" [(ngModel)]="model.nbEchantillon" name="nbEchantillon" ></ion-input></div>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-    -->
+        
        <ion-item>
         <ion-label stacked >Praticien</ion-label>
         <ion-select name="praID" [(ngModel)]= "model.praID">
-          <ion-option *ngFor="let praticien of praticiens" value="{{praticien.id}}">{{praticien.nom}}_{{ praticien.category_name}}</ion-option>
+          <ion-option *ngFor="let praticien of praticiens" value="{{praticien.id}}">{{praticien.nom}}-{{ praticien.category_name}}</ion-option>
         </ion-select>
      </ion-item> 
    
@@ -70,3 +56,22 @@
    </ion-list> 
     
   </ion-content>
+
+
+   <!-- <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <div>
+                     <ion-label stacked >Medicament</ion-label>
+                      <ion-select name="medID" [(ngModel)]= "model.medID">
+                        <ion-option *ngFor="let medicament of medicaments" value="{{medicament.id}}">{{medicament.nom}}</ion-option>
+                      </ion-select>
+                    </div>
+                </ion-col>
+               
+                <ion-col>
+                  <div><ion-label stacked> Nombres d'échantillon </ion-label>
+                    <ion-input type="text" [(ngModel)]="model.nbEchantillon" name="nbEchantillon" ></ion-input></div>
+                </ion-col>
+              </ion-row>
+            </ion-grid> -->
