@@ -40,7 +40,7 @@ searchText: string;
         this.praticiens = result;
       })
            
-      this.medicamentProvider.getAll(!this.onlyInactives, this.searchText)
+      this.medicamentProvider.getAll(this.searchText)
       .then((result: any[]) => {
         this.medicaments = result;
       })
@@ -51,7 +51,7 @@ searchText: string;
     this.saveRapport()
       .then(() => {
         this.toast.create({ message: 'rapport saved.', duration: 3000, position: 'botton' }).present();
-        this.navCtrl.pop();
+        this.navCtrl.popTo(GestionRapportPage);
       })
       .catch(() => {
         this.toast.create({ message: 'Erreur.', duration: 3000, position: 'botton' }).present();
@@ -65,6 +65,5 @@ searchText: string;
       return this.rapportProvider.insert(this.model);
     }
   }
- 
-}
+ }
 

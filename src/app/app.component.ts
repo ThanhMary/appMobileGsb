@@ -3,7 +3,7 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { DatabaseProvider } from '../providers/database/database';
-import { HomePage } from '../pages/home/home';
+import { LoginPage } from '../pages/login/login';
 
 
 @Component({
@@ -22,18 +22,18 @@ export class MyApp {
       dbProvider.createDatabase()
         .then(() => {
           // closing the SplashScreen only when the bank is created
-          this.openHomePage(splashScreen);
+          this.openLoginPage(splashScreen);
         })
         .catch(() => {
           // or if there is an error in creating the database
-          this.openHomePage(splashScreen);
+          this.openLoginPage(splashScreen);
         });
     });
   }
  
-  private openHomePage(splashScreen: SplashScreen) {
+  private openLoginPage(splashScreen: SplashScreen) {
     splashScreen.hide();
-    this.rootPage = HomePage;
+    this.rootPage = LoginPage;
   }
 }
 

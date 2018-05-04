@@ -5,7 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 //import {LOCALE_ID} from '@angular/core';
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 import { AccueilPage } from '../pages/accueil/accueil';
 
 import { EditPraticienPage } from '../pages/edit-praticien/edit-praticien';
@@ -22,12 +21,17 @@ import { MedicamentProvider } from '../providers/medicament/medicament';
 import { RapportProvider } from '../providers/rapport/rapport';
 import { CategoryProvider } from '../providers/category/category';
 import { FamilleProvider } from '../providers/famille/famille';
-
+import { UserProvider } from '../providers/user/user';
+import { LoginPage } from '../pages/login/login';
+import { RegisterPage } from '../pages/register/register';
+import { AuthService } from '../providers/auth-service/auth-service';
+//import { FingerprintAIO} from '@ionic-native/fingerprint-aio';
  
 @NgModule({
   declarations: [
     MyApp,
-    HomePage, 
+    LoginPage,
+    RegisterPage,
     AccueilPage,
     EditPraticienPage,
     EditMedicamentPage,
@@ -45,7 +49,8 @@ import { FamilleProvider } from '../providers/famille/famille';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage, 
+    LoginPage,
+    RegisterPage,
     AccueilPage,
 
     EditPraticienPage,
@@ -67,7 +72,10 @@ import { FamilleProvider } from '../providers/famille/famille';
     MedicamentProvider,
     RapportProvider,
     CategoryProvider,
-    FamilleProvider
+    FamilleProvider,
+    UserProvider
+   // AuthService
+    //FingerprintAIO
     
   ]
 })

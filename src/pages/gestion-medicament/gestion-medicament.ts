@@ -13,8 +13,8 @@ import { MedicamentProvider, Medicament} from '../../providers/medicament/medica
 })
 export class GestionMedicamentPage {
 
-  medicaments:any []= [];
-  onlyInactives: boolean = false;
+  medicaments = [];
+  // onlyInactives: boolean = false;
   searchText: string = null;
   
   constructor(public navCtrl: NavController, 
@@ -26,7 +26,7 @@ export class GestionMedicamentPage {
     this.getAllMedicaments();
   }
   getAllMedicaments(){
-    this.medicamentProvider.getAll(!this.onlyInactives, this.searchText)
+    this.medicamentProvider.getAll(this.searchText)
     .then((result:any [])=>{
       this.medicaments= result;
     });

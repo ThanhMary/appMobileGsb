@@ -8,7 +8,7 @@ export class DatabaseProvider {
    
   public getDB() {
     return this.sqlite.create({
-      name: 'MobileAppGsb.db',
+      name: 'AppGsb5.db',
       location: 'default'
     });
   }
@@ -16,11 +16,9 @@ export class DatabaseProvider {
   public createDatabase() {
     return this.getDB()
       .then((db: SQLiteObject) => {
- 
-        this.createTables(db);
-       
-        this.insertDefaultItems(db);
-        this.insertDefaultItemsFam(db);
+         this.createTables(db);
+         this.insertDefaultItems(db);
+         this.insertDefaultItemsFam(db);
       })
       .catch(e => console.log(e));
   }
@@ -35,9 +33,9 @@ export class DatabaseProvider {
       ['CREATE TABLE IF NOT EXISTS categories (id integer primary key AUTOINCREMENT NOT NULL, name TEXT)'],
       ['CREATE TABLE IF NOT EXISTS praticiens (id integer primary key AUTOINCREMENT NOT NULL, nom TEXT, prenom REAL, adresse TEXT, departement TEXT, tel TEXT, specialitePlus TEXT, active integer, category_id integer, FOREIGN KEY(category_id) REFERENCES categories(id))'],
       ['CREATE TABLE IF NOT EXISTS familles(id integer primary key NOT NULL, name TEXT)'],
-      ['CREATE TABLE IF NOT EXISTS medicaments (id integer primary key AUTOINCREMENT NOT NULL, nom TEXT, composition TEXT, effets TEXT, posologie TEXT, active integer, famID integer, FOREIGN KEY(famID) REFERENCES familles(id))'],
-      ['CREATE TABLE IF NOT EXISTS rapports (id integer primary key AUTOINCREMENT NOT NULL, date DATE, motif TEXT, bilan TEXT, medicament TEXT, nbEchantillon TEXT, active integer, praID integer, medID integer, FOREIGN KEY(praID) REFERENCES praticiens(id), FOREIGN KEY(medID) REFERENCES medicaments(id))'],
-      ['CREATE TABLE IF NOT EXISTS users (id Text, nom Text, prenom Text, login Text, password Text, adresse Text, codePostale Text, dateEmbauche Text)']
+      ['CREATE TABLE IF NOT EXISTS medicaments (id integer primary key AUTOINCREMENT NOT NULL, nom TEXT, composition TEXT, effets TEXT, posologie TEXT, famID integer, FOREIGN KEY(famID) REFERENCES familles(id))'],
+      ['CREATE TABLE IF NOT EXISTS rapports (id integer primary key AUTOINCREMENT NOT NULL, date DATE, motif TEXT, bilan TEXT, medicament TEXT, nbEchantillon TEXT, praID integer, medID integer, FOREIGN KEY(praID) REFERENCES praticiens(id), FOREIGN KEY(medID) REFERENCES medicaments(id))'],
+      ['CREATE TABLE IF NOT EXISTS users (id integer, nom TEXT, prenom TEXT, login TEXT, mdp TEXT)']
     ])
       .then(() => console.log('Tables créées'))
       .catch(e => console.error('Erreur lors de la crétation des tables', e));

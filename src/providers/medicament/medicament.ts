@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+//import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { DatabaseProvider} from '../database/database';
@@ -14,8 +14,8 @@ export class MedicamentProvider {
 public insert(medicament: Medicament){
   return this.dbProvider.getDB()
   .then((db: SQLiteObject) =>{
-    let sql = 'insert into medicaments (nom, composition, effets, posologie, active, famID) values (?, ?, ?, ?, ?, ?)';
-    let data = [medicament.nom, medicament.composition, medicament.effets, medicament.posologie, medicament.active? 1 : 0, medicament.famID];
+    let sql = 'insert into medicaments (nom, composition, effets, posologie, famID) values (?, ?, ?, ?, ?)';
+    let data = [medicament.nom, medicament.composition, medicament.effets, medicament.posologie, medicament.famID];
 
     return db.executeSql(sql, data)
       .catch((e) => console.error('can not insert data medicaments',e));
@@ -27,8 +27,8 @@ public insert(medicament: Medicament){
 public update(medicament: Medicament){
   return this.dbProvider.getDB()
   .then ((db: SQLiteObject)=>{
-    let sql = 'update medicaments set nom = ?, composition = ?, effets = ?, posologie = ?, famID = ?, active = ? where id = ?';
-    let data = [medicament.nom, medicament.composition, medicament.effets, medicament.posologie, medicament.famID, medicament.active ? 1 : 0, medicament.id];
+    let sql = 'update medicaments set nom = ?, composition = ?, effets = ?, posologie = ?, famID = ? where id = ?';
+    let data = [medicament.nom, medicament.composition, medicament.effets, medicament.posologie, medicament.famID, medicament.id];
     return db.executeSql(sql, data)
     .catch ((e)=>console.error());
   })
@@ -49,7 +49,7 @@ public remove(id: number){
 }
 
 // function get data
-public get(id){
+public get(id: number){
   return this.dbProvider.getDB()
   .then((db:SQLiteObject)=>{
     let sql ='SELECT * FROM medicaments WHERE id = ?';
@@ -57,7 +57,7 @@ public get(id){
 
     return db.executeSql(sql, data)
     .then ((data: any)=>{
-      if (data.rowx.lenght > 0){
+      if (data.rows.length > 0){
         let item = data.rows.item(0);
         let medicament = new Medicament();
         medicament.id = item.id;
@@ -65,7 +65,7 @@ public get(id){
         medicament.composition= item.composition;
         medicament.effets= item.effets;
         medicament.posologie= item.posologie;
-        medicament.active= item.active;
+        // medicament.active= item.active;
         medicament.famID = item.famID;
       
         return medicament;
@@ -79,11 +79,11 @@ public get(id){
 
 // function get all data 
 
-public getAll(active: boolean, nom: string = null){
+public getAll(nom:string = null){
   return this.dbProvider.getDB()
   .then ((db: SQLiteObject)=>{
-    let sql = 'select m.*, f.name as famille_name FROM medicaments m inner join familles f on m.famID = f.id where m.active = ?';
-    var data: any[] = [active ? 1 : 0];
+    let sql = 'select m.*, f.name as famille_name FROM medicaments m inner join familles f on m.famID = f.id';
+    var data =[];
 
     if (nom){
       sql += 'and m.nom like ?'
@@ -91,8 +91,8 @@ public getAll(active: boolean, nom: string = null){
     }
     return db.executeSql(sql, data)
     .then((data: any)=>{
-      if (data.rows.length > 0) {
-        let medicaments: any[]= [];
+      if (data.rows.length >0) {
+        let medicaments = [];
         for (var i=0; i< data.rows.length; i++){
         var medicament = data.rows.item(i);
         medicaments.push(medicament);
@@ -114,7 +114,6 @@ export class Medicament {
   composition: string;
   effets: string;
   posologie: string;
-  active: boolean;
   famID: number;
 }
  

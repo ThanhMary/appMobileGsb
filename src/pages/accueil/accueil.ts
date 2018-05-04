@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { GestionRapportPage } from '../gestion-rapport/gestion-rapport';
 import { GestionPraticienPage } from '../gestion-praticien/gestion-praticien';
-import {GestionMedicamentPage} from '../gestion-medicament/gestion-medicament';
-
+import { GestionMedicamentPage} from '../gestion-medicament/gestion-medicament';
+import { UserProvider, User } from '../../providers/user/user';
 
 @Component({
   selector: 'page-accueil',
@@ -11,27 +11,32 @@ import {GestionMedicamentPage} from '../gestion-medicament/gestion-medicament';
 
 })
 export class AccueilPage {
-
-  
-  constructor(public navCtrl: NavController) {
+model: User;
+  constructor(private nav: NavController,private userP: UserProvider, private navPa: NavParams) {
+   this.model = new User;
+      this.userP.get(this.navPa.data.id)
+       .then((result: any) => {
+         this.model = result;
+       })
+      }
+   
+  public logout() {
+   
+      this.nav.setRoot('LoginPage')
+   
   }
-
-  ionViewDidLoad() {
+    ionViewDidLoad() {
     console.log('ionViewDidLoad AccueilPage');
   }
 
   public goToGestionRapport(){
-    this.navCtrl.push(GestionRapportPage);
+    this.nav.push(GestionRapportPage);
   }
   public goToGestionPraticien(){
-    this.navCtrl.push(GestionPraticienPage);
+    this.nav.push(GestionPraticienPage);
   }
   public goToGestionMedicament(){
-    this.navCtrl.push(GestionMedicamentPage);
+    this.nav.push(GestionMedicamentPage);
   }
-
-  
-  
-
 
 }

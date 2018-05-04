@@ -14,8 +14,8 @@
        </ion-item>
       <ion-item >
           <ion-label stacked> Nom commercial </ion-label>
-          <ion-input type="text" [(ngModel)]="model.nom" name ="nom"></ion-input>
-        </ion-item>
+          <ion-input type="text" [(ngModel)]= "model.nom" name ="nomMed"></ion-input>
+      </ion-item>
         <ion-item>
           <ion-label stacked>Famille de médicament</ion-label>
           <ion-select name="famille_id" [(ngModel)]="model.famID">
@@ -44,10 +44,10 @@
         </ion-select>
       </ion-item>
 
-      <ion-item>
+      <!-- <ion-item>
       <ion-label stacked>Ative</ion-label>
       <ion-checkbox name="active" [(ngModel)]="model.active"></ion-checkbox>
-    </ion-item>
+    </ion-item> -->
 	
     <br>
     <button ion-button block (click)="save()">Enregistrer</button>

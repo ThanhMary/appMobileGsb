@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { CategoryProvider } from '../../providers/category/category'
 import { PraticienProvider, Praticien } from '../../providers/praticien/praticien';
+import { GestionPraticienPage } from '../gestion-praticien/gestion-praticien';
 
 @Component({
   selector: 'page-edit-praticien',
@@ -44,7 +45,7 @@ export class EditPraticienPage {
     this.savePraticien()
       .then(() => {
         this.toast.create({ message: 'Praticien saved.', duration: 3000, position: 'botton' }).present();
-        this.navCtrl.pop();
+        this.navCtrl.popTo(GestionPraticienPage);
       })
       .catch(() => {
         this.toast.create({ message: 'Erreur.', duration: 3000, position: 'botton' }).present();

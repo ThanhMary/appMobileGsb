@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title>Enregistrer user</ion-title>
+  </ion-navbar>
+</ion-header>
+ 
+
+<ion-content class="login-content" padding>
+  <div class="login-box">
+    
+    <form (ngSubmit)="save()" #registerForm="ngForm">
+      <ion-row>
+        <ion-col>
+          <ion-list inset>
+            
+            
+            <ion-item>
+              <ion-input type="text" placeholder="Votre nom" name="nom" [(ngModel)]="model.nom" ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input type="text" placeholder="Votre prénom" name="prenom" [(ngModel)]="model.prenom" ></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input type="text" placeholder="Votre email" name="login" [(ngModel)]="model.login" ></ion-input>
+            </ion-item>
+            
+            <ion-item>
+              <ion-input type="password" placeholder="Votre mot de passe" name="mdp" [(ngModel)]="model.mdp" ></ion-input>
+            </ion-item>
+            
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      
+      <ion-row>
+        <ion-col class="signup-col">
+          <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Enregistrer</button>
+        </ion-col>
+      </ion-row>
+      
+    </form>
+  </div>
+</ion-content>

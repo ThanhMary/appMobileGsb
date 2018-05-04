@@ -10,8 +10,7 @@ import { EditRapportPage } from '../../pages/edit-rapport/edit-rapport';
 })
 export class GestionRapportPage {
 
-  rapports: any[] = [];
-  onlyInactives: boolean = false;
+  rapports = [];
   searchDate: Date = null;
  
   constructor(public navCtrl: NavController, 
@@ -24,7 +23,7 @@ export class GestionRapportPage {
   }
   
 public getAllRapports() {
-    this.rapportProvider.getAll(!this.onlyInactives, this.searchDate)
+    this.rapportProvider.getAll(this.searchDate)
       .then((result: any[]) => {
         this.rapports = result;
       });
