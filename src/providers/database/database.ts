@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+import { Http, Headers, RequestOptions } from '@angular/http';
  
 @Injectable()
 export class DatabaseProvider {
  
-  constructor(private sqlite: SQLite) { }
+  constructor(private sqlite: SQLite, private http: Http) { }
    
   public getDB() {
     return this.sqlite.create({
@@ -98,6 +99,19 @@ private insertDefaultItemsFam(db: SQLiteObject) {
      }
   })
   .catch(e => console.error('Erreur de consulter la qtd de familles', e));
+}
+
+// pour exporter data d'une table
+public AddTableToSynchronization(syncUrl, tblName){
+  return new Promise((resolve, reject) => {
+    let url = syncUrl + "/AddTable/" + tblName;
+    this.http.get(url)
+    .subscribe(() => {
+      resolve();
+    }, (err) => {
+      reject("Error while adding table to synchronization");
+    });
+  });
 }
 
 }

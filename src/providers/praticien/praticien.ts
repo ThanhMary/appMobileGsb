@@ -94,12 +94,20 @@ export class PraticienProvider {
               return praticiens;
             } else {
               return [];
+              
             }
+            
           })
           .catch((e) => console.error(e));
       })
       .catch((e) => console.error(e));
   }
+public getPraticienData(){
+ return JSON.stringify({Praticien});
+  
+ }
+
+
 }// fermeture de la classe PraticienProvider
  
 export class Praticien {
