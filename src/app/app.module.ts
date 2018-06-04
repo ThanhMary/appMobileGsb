@@ -21,7 +21,7 @@ import { MedicamentProvider } from '../providers/medicament/medicament';
 import { RapportProvider } from '../providers/rapport/rapport';
 import { CategoryProvider } from '../providers/category/category';
 import { FamilleProvider } from '../providers/famille/famille';
-import { UserProvider } from '../providers/user/user';
+import { VisiteurProvider } from '../providers/visiteur/visiteur';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { AuthService } from '../providers/auth-service/auth-service';
@@ -73,7 +73,7 @@ import { AuthService } from '../providers/auth-service/auth-service';
     RapportProvider,
     CategoryProvider,
     FamilleProvider,
-    UserProvider
+    VisiteurProvider
    // AuthService
     //FingerprintAIO
     

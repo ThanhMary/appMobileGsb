@@ -1,4 +1,49 @@
-<ion-content class="login-content" padding>
+
+ <ion-content padding>
+<br>
+<br>
+<br>
+    <ion-row class="logo-row">
+        <ion-col></ion-col>
+        <ion-col width-67>
+            <img src="assets/img/login.jpg" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+      <br>
+      <br>
+      <br>
+    <ion-list>
+      <ion-item>
+        <ion-label>Pseudo</ion-label>
+        <ion-input type="text" [value]="username" [(ngModel)]="username"></ion-input>
+      </ion-item>
+   
+      <ion-item>
+        <ion-label>Mot de passe</ion-label>
+        <ion-input type="password" [value]="password" [(ngModel)]="password"></ion-input>
+      </ion-item>
+    </ion-list>
+   
+    <div padding>
+      <button ion-button full (click)='login()'>Login</button>
+    </div>
+
+
+    <br>
+    <br>
+    <img src="assets/img/logo.png" style="display:block;width:20%;height:auto;margin-left:auto;margin-right:auto;" />
+  </ion-content>
+
+
+
+
+
+
+
+
+
+<!-- <ion-content class="login-content" padding>
     <ion-row class="logo-row">
       <ion-col></ion-col>
       <ion-col width-67>
@@ -13,11 +58,11 @@
             <ion-list inset>
               
               <ion-item>
-                <ion-input type="text" placeholder="Votre email" name="login" [(ngModel)]= "loginCurrent"></ion-input>
+                <ion-input type="text" placeholder="Votre email" name="loginCurrent"></ion-input>
               </ion-item>
               
               <ion-item>
-                <ion-input type="password" placeholder="Votre mot de pass" name="mdp" [(ngModel)]= "mdpCurrent"></ion-input>
+                <ion-input type="password" placeholder="Votre mot de pass" name="mdpCurrent" ></ion-input>
               </ion-item>
               
             </ion-list>
@@ -40,82 +85,5 @@
   </ion-content>
 
 
+ -->
 
-
-
-
-
-
-
-
-
-
-<!-- <ion-header>
-  <ion-navbar>
-    <ion-title>Login by FingerPrint</ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content padding>
-
-
-<img src="assets/img/login.jpg" tappable (click)= "login()" style="display:block;width:50%;height:auto;margin-left:auto;margin-right:auto;" />
-</ion-content> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <ion-header>
-  <ion-navbar>
-    <ion-title>
- 
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-<ion-content padding>
-    <img src="assets/img/login.jpg" style="display:block;width:30%;height:auto;margin-left:auto;margin-right:auto;" />
-        <form>
-              <div class="spacer" style="width:300px;height:16px;"></div>
-              <ion-item>
-                <ion-label stacked> 
-                  Pseudo
-                </ion-label>
-                <ion-input type="text" placeholder="Votre pseudo"></ion-input>
-              </ion-item>
-              <div class="spacer" style="width:300px;height:15px;"></div>
-              <ion-item >
-                <ion-label stacked>
-                  Mot de passe
-                </ion-label>
-                <ion-input type="password" placeholder="Votre mot de passe"></ion-input>
-              </ion-item>
-              <br>
-          
-              <button  ion-button block style="font-size:15px;" (click)="goToAccueil()">
-              Connecter
-            </button>
-            <br>
-           
-             <ion-item >
-                <ion-label>
-                  Enregistrer votre pseudo?
-                </ion-label>
-                <ion-checkbox on-click="enregistrerPseudo()"></ion-checkbox>
-              </ion-item>
-            </form>
-            <br>
-            <br>
-    <img src="assets/img/logo.png" style="display:block;width:20%;height:auto;margin-left:auto;margin-right:auto;" />
-</ion-content> -->

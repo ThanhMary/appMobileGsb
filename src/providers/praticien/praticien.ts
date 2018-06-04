@@ -78,8 +78,7 @@ export class PraticienProvider {
       .then((db: SQLiteObject) => {
         let sql = 'SELECT p.*, c.name as category_name FROM praticiens p inner join categories c on p.category_id = c.id where p.active = ?';
         var data: any[] = [active ? 1 : 0];
- 
-        // filtrer par nom de praticien
+         // filtrer par nom de praticien
         if (nom) {
           sql += ' and p.nom like ?'
           data.push('%' + nom + '%');

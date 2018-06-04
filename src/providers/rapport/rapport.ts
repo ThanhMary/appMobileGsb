@@ -10,8 +10,8 @@ export class RapportProvider {
   public insert(rapport: Rapport) {
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
-        let sql = 'insert into rapports(date, motif, bilan, medicament, nbEchantillon, praID, medID)  values (?, ?, ?, ?, ?, ?, ?)';
-        let data = [rapport.date, rapport.motif, rapport.bilan, rapport.medicament, rapport.nbEchantillon, rapport.praID, rapport.medID]; 
+        let sql = 'insert into rapports (date, motif, bilan, medicament, nbEchantillon, praID, medID, visID)  values (?, ?, ?, ?, ?, ?, ?, ?)';
+        let data = [rapport.date, rapport.motif, rapport.bilan, rapport.medicament, rapport.nbEchantillon, rapport.praID, rapport.medID, rapport.visID]; 
  
         return db.executeSql(sql, data)
           .catch((e) => console.error('can not insert data rapport',e));
@@ -22,8 +22,8 @@ export class RapportProvider {
   public update(rapport: Rapport) {
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
-        let sql = 'update rapports set date=?, motif=?, bilan=?, medicament=?, nbEchantillon=?, praID=?, medID=? where id=?';
-        let data = [rapport.date, rapport.motif, rapport.bilan, rapport.medicament, rapport.nbEchantillon, rapport.praID, rapport.medID];
+        let sql = 'update rapports set date = ?, motif = ?, bilan = ?, medicament = ?, nbEchantillon = ?, praID = ?, medID = ?, visID  where id = ?';
+        let data = [rapport.date, rapport.motif, rapport.bilan, rapport.medicament, rapport.nbEchantillon, rapport.praID, rapport.medID, rapport.visID, rapport.id];
         
         return db.executeSql(sql, data)
           .catch((e) => console.error('can not update rapport',e));
@@ -48,8 +48,7 @@ export class RapportProvider {
       .then((db: SQLiteObject) => {
         let sql = 'select * from rapports where id = ?';
         let data = [id];
- 
-        return db.executeSql(sql, data)
+         return db.executeSql(sql, data)
           .then((data: any) => {
             if (data.rows.length > 0){
               let item = data.rows.item(0);
@@ -62,8 +61,9 @@ export class RapportProvider {
               rapport.nbEchantillon = item.nbEchantillon;
               rapport.praID = item.praID;
               rapport.medID = item.medID;
+              rapport.visID = item.visID;
 
-              return rapport;
+              return rapport; 
             }
              return null;
           })
@@ -75,7 +75,7 @@ export class RapportProvider {
   public getAll(date: Date = null){
       return this.dbProvider.getDB()
         .then ((db: SQLiteObject)=>{
-          let sql ='select r.*, p.nom as praticien_nom, m.famID as medicament_nom from rapports r inner join praticiens p on r.praID = p.id  inner join medicaments m on r.medID = m.id';
+          let sql ='select r.*, p.nom as praticien_nom, m.famID as medicament_nom from rapports r inner join praticiens p on r.praID = p.id  inner join medicaments m on r.medID = m.id inner join visiteurs v on r.visID = v.id';
           var data = [];
       //filtrer par la date
           if(date){
@@ -86,7 +86,7 @@ export class RapportProvider {
         .then((data: any)=>{
           if (data.rows.length > 0){
             let rapports = [];
-            for (var i = 0; i < data.rows.length; i++){
+            for (var i = 0; i<data.rows.length; i++){
             var rapport = data.rows.item(i);
               rapports.push(rapport);
             }
@@ -110,6 +110,7 @@ export class Rapport {
     nbEchantillon: string;
     praID: number;
     medID: number;
+    visID: Text;
    }
 
 

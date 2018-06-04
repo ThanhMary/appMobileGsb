@@ -3,7 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { GestionRapportPage } from '../gestion-rapport/gestion-rapport';
 import { GestionPraticienPage } from '../gestion-praticien/gestion-praticien';
 import { GestionMedicamentPage} from '../gestion-medicament/gestion-medicament';
-import { UserProvider, User } from '../../providers/user/user';
+import { VisiteurProvider, Visiteur } from '../../providers/visiteur/visiteur';
 
 @Component({
   selector: 'page-accueil',
@@ -11,10 +11,10 @@ import { UserProvider, User } from '../../providers/user/user';
 
 })
 export class AccueilPage {
-model: User;
-  constructor(private nav: NavController,private userP: UserProvider, private navPa: NavParams) {
-   this.model = new User;
-      this.userP.get(this.navPa.data.id)
+model: Visiteur;
+  constructor(private nav: NavController,private visiteurP: VisiteurProvider, private navPa: NavParams) {
+   this.model = new Visiteur;
+      this.visiteurP.get(this.navPa.data.id)
        .then((result: any) => {
          this.model = result;
        })
@@ -38,5 +38,4 @@ model: User;
   public goToGestionMedicament(){
     this.nav.push(GestionMedicamentPage);
   }
-
 }

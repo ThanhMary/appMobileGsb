@@ -31,21 +31,19 @@ searchText: string;
     }
   }
  
-  /**
-   * Runs when the page has loaded
-   */
-  ionViewDidLoad() {
-      this.praticienProvider.getAll(!this.onlyInactives, this.searchText)
-      .then((result: any[]) => {
-        this.praticiens = result;
-      })
+ 
+  // ionViewDidLoad() {
+  //     this.praticienProvider.getAll(!this.onlyInactives, this.searchText)
+  //     .then((result: any[]) => {
+  //       this.praticiens = result;
+  //     })
            
-      this.medicamentProvider.getAll(this.searchText)
-      .then((result: any[]) => {
-        this.medicaments = result;
-      })
+  //     this.medicamentProvider.getAll(this.searchText)
+  //     .then((result: any[]) => {
+  //       this.medicaments = result;
+  //     })
 
-    }
+  //   }
  
   save() {
     this.saveRapport()
@@ -65,5 +63,11 @@ searchText: string;
       return this.rapportProvider.insert(this.model);
     }
   }
+private export(){
+  
+
+
+}
+
  }
 

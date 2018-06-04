@@ -31,11 +31,12 @@ export class DatabaseProvider {
    
     db.sqlBatch([
       ['CREATE TABLE IF NOT EXISTS categories (id integer primary key AUTOINCREMENT NOT NULL, name TEXT)'],
-      ['CREATE TABLE IF NOT EXISTS praticiens (id integer primary key AUTOINCREMENT NOT NULL, nom TEXT, prenom REAL, adresse TEXT, departement TEXT, tel TEXT, specialitePlus TEXT, active integer, category_id integer, FOREIGN KEY(category_id) REFERENCES categories(id))'],
+      ['CREATE TABLE IF NOT EXISTS praticiens (id integer primary key AUTOINCREMENT NOT NULL, nom TEXT, prenom TEXT, adresse TEXT, departement TEXT, tel TEXT, specialitePlus TEXT, active integer, category_id integer, FOREIGN KEY(category_id) REFERENCES categories(id))'],
       ['CREATE TABLE IF NOT EXISTS familles(id integer primary key NOT NULL, name TEXT)'],
       ['CREATE TABLE IF NOT EXISTS medicaments (id integer primary key AUTOINCREMENT NOT NULL, nom TEXT, composition TEXT, effets TEXT, posologie TEXT, famID integer, FOREIGN KEY(famID) REFERENCES familles(id))'],
-      ['CREATE TABLE IF NOT EXISTS rapports (id integer primary key AUTOINCREMENT NOT NULL, date DATE, motif TEXT, bilan TEXT, medicament TEXT, nbEchantillon TEXT, praID integer, medID integer, FOREIGN KEY(praID) REFERENCES praticiens(id), FOREIGN KEY(medID) REFERENCES medicaments(id))'],
-      ['CREATE TABLE IF NOT EXISTS users (id integer, nom TEXT, prenom TEXT, login TEXT, mdp TEXT)']
+      ['CREATE TABLE IF NOT EXISTS rapports (id integer primary key AUTOINCREMENT NOT NULL, date DATE, motif TEXT, bilan TEXT, medicament TEXT, nbEchantillon TEXT, praID integer, medID integer,visID TEXT, FOREIGN KEY(visID) REFERENCES visiteurs(id), FOREIGN KEY(praID) REFERENCES praticiens(id), FOREIGN KEY(medID) REFERENCES medicaments(id))'],
+      ['CREATE TABLE IF NOT EXISTS offrir (quantité	INTEGER NOT NULL,rapport_id	INTEGER NOT NULL, medicament_id	INTEGER NOT NULL, FOREIGN KEY(rapport_id) REFERENCES rapports(id), FOREIGN KEY(medicament_id) REFERENCES medicaments(id))'],
+      ['CREATE TABLE IF NOT EXISTS visiteurs (id TEXT primary key NOT NULL, nom TEXT, prenom TEXT, login TEXT, mdp TEXT, adresse TEXT, cp INTEGER, ville TEXT, dateEmbauche DATE)']
     ])
       .then(() => console.log('Tables créées'))
       .catch(e => console.error('Erreur lors de la crétation des tables', e));
